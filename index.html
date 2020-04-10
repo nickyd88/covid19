@@ -3,27 +3,55 @@
 	<head>
 		<title>COVID Data Viz</title>
 		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/covid19/css/main.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	</head>
 	<body>
 		<nav>
     		<ul>
         		<li><a href="/covid19/">Home</a></li>
-	        	<li><a href="/covid19/county_map_static">County Level Infection Rates</a></li>
-        		<li><a href="/covid18/state_map_static">Static State Level Infections</a></li>
-        		<li><a href="/covid18/state_map_animated">Animated State Level Infections</a></li>
+	        	<li><a href="/covid19/covid_map_static">County Level Infection Rates</a></li>
+        		<li><a href="/covid19/state_map_static">Static State Level Infections</a></li>
+        		<li><a href="/covid19/state_map_animated">Animated State Level Infections</a></li>
     		</ul>
 		</nav>
 		<div class="container">
     		<div class="blurb">
         		<h1>Ongoing COVID-19 Data Viz</h1>
-				<h2>
-                    <a href="/covid19/county_map_static">County Level Infection Rates</a>
-                    <a href="/covid18/state_map_static">Static State Level Infections</a>
-                    <a href="/covid18/state_map_animated">Animated State Level Infections</a>
-                </h2>
     		</div><!-- /.blurb -->
 		</div><!-- /.container -->
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="projects">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Data Visualizations</h3>
+  </div>
+
+  <div class="w3-row-padding">
+	  <a href="/covid19/covid_map_static">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">County-Level Infections</div>
+        <img src="/covid19/count_static.png" alt="House" style="width:100%">
+      </div>
+    </div>
+		</a>
+	  <a href="/covid19/state_map_static">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Static State Curves</div>
+        <img src="/covid19/state_static.png" alt="House" style="width:100%">
+      </div>
+    </div>
+		  </a>
+	  <a href="/covid19/state_map_animated">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Animated State Curves</div>
+        <img src="/covid19/state_animated.png" alt="House" style="width:100%">
+      </div>
+    </div>
+		  </a>
+
+  </div>
 		<footer>
     		<ul>
         		<li><a href="https://github.com/nickyd88">github.com/nicky88</a></li>
