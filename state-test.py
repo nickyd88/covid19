@@ -30,14 +30,21 @@ def rolling(x, t):
     return x.apply(lambda y: x.loc[x['datetime'].between(y['datetime'] - t,
                                                      y['datetime'],
                                                      inclusive=True),'cases'].min(),axis=1)
+def l7deaths(x, t):
+    return x.apply(lambda y: x.loc[x['datetime'].between(y['datetime'] - t,
+                                                     y['datetime'],
+                                                     inclusive=True),'deaths'].min(),axis=1)
 def checker(x, t):
     return x.apply(lambda y: x.loc[x['datetime'].between(y['datetime'] - t,
                                                      y['datetime'],
                                                      inclusive=True),'state'].count(),axis=1)
 
 covid['lastweek'] = covid.groupby('state', group_keys=False).apply(rolling, pd.Timedelta(2, unit='d'))
+covid['lastweekdeaths'] = covid.groupby('state', group_keys=False).apply(l7deaths, pd.Timedelta(2, unit='d'))
 covid['checker'] = covid.groupby('state', group_keys=False).apply(checker, pd.Timedelta(2, unit='d'))
 covid['New Cases Last 3 Days'] = covid['cases'] - covid['lastweek']
+covid['New Deaths Last 3 Days'] = covid['deaths'] - covid['lastweekdeaths']
+covid['Total Cases 3 Days Ago'] = covid['lastweek']
 covid['Total Cases'] = covid['cases']
 #covid['region']
 
@@ -60,7 +67,7 @@ covid_states['Opacity'] = covid_states['state'].apply(lambda x: 1 if x in showst
 
 fig = px.scatter(
         covid_states[covid_states['date']>='2020-03-01'],
-        x="Total Cases",
+        x="Total Cases 3 Days Ago",
         y="New Cases Last 3 Days",
         animation_frame="date",
         animation_group="state",
@@ -82,9 +89,9 @@ fig.add_shape(
         # Line Diagonal
             type="line",
             x0=2,
-            y0=1,
+            y0=1.5,
             x1=500000,
-            y1=200000,
+            y1=300000,
             line=dict(
                 color="darkred",
                 width=3,
@@ -93,7 +100,7 @@ fig.add_shape(
 ),
 
 fig.update_layout(
-    title_text='US COVID Growth by State Over Time<br>New Cases Last 3 Days vs Total Cases',
+    title_text='US COVID Growth by State Over Time<br>New Cases Last 3 Days vs Case Count 3 Days Ago',
     annotations=[
         go.layout.Annotation(
             showarrow=False,
@@ -111,14 +118,15 @@ fig.update_layout(
 )
 
 fig.add_trace(go.Scatter(
-    x=[500000],
-    y=[250000],
-    text=["Trendline"],
+    x=[400000],
+    y=[120000],
+    text=["Early Trendline"],
     mode="text",
     showlegend=False
 
 ))
 fig.show()
+plotly.offline.plot(fig, filename='state_map_animated/index.html')
 
 
 

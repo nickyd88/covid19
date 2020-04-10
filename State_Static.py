@@ -130,7 +130,7 @@ fig.update_traces(
     textposition='bottom right'
 )
 fig.update_layout(
-    title_text='US COVID Deaths Growth by State<br>Through '+latest,
+    title_text='US COVID Case Growth by State<br>Through '+latest,
     xaxis_title = xvar,
     yaxis_title = yvar,
     annotations=[
@@ -151,10 +151,10 @@ fig.update_layout(
 fig.add_shape(
         # Line Diagonal
             type="line",
-            x0=20,
-            y0=.08,
-            x1=4000,
-            y1=50,
+            x0=1,
+            y0=1,
+            x1=10000,
+            y1=2500,
             line=dict(
                 color="darkred",
                 width=3,
@@ -163,15 +163,17 @@ fig.add_shape(
 )
 
 fig.add_trace(go.Scatter(
-    x=[500000],
-    y=[250000],
-    text=["Trendline"],
+    x=[3500],
+    y=[1500],
+    text=["Early Trendline"],
     mode="text",
     showlegend=False
 
 ))
 
 fig.show()
+
+plotly.offline.plot(fig, filename='state_map_static/index.html')
 
 
 
